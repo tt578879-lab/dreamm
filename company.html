@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Thông tin công ty</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.top-bar {
+    margin-bottom: 15px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid #999;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.back-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.table-container {
+    overflow-x: auto; /* giúp responsive trên điện thoại */
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1200px;
+}
+
+th, td {
+    border: 1px solid #999;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+tr:nth-child(even) td {
+    background-color: #fafafa;
+}
+
+/* Dòng chữ đỏ dưới bảng */
+#footerText {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="index.html" class="back-btn">← Quay về trang chủ</a>
+</div>
+
+<h2 id="companyName">Thông tin công ty</h2>
+
+<div class="table-container">
+    <table id="dataTable"></table>
+</div>
+
+<!-- Dòng chữ màu đỏ -->
+<div id="footerText">
+    Tiên Du, Bắc Ninh
+</div>
+
+<script>
+// ================== DỮ LIỆU ==================
+const data = {
+    ANS: [
+        {
+            may: "Dell Optiplex 7090",
+            seri: "ABC123456",
+            ip: "192.168.1.10",
+            vitri: "Phòng IT",
+            ngay: "20/09/2025",
+            phuongthuc: "LAN"
+        },
+        {
+            may: "HP ProDesk 600",
+            seri: "XYZ987654",
+            ip: "192.168.1.11",
+            vitri: "Kế toán",
+            ngay: "21/09/2025",
+            phuongthuc: "WiFi"
+        },
+        {
+            may: "Lenovo M720",
+            seri: "LMN456789",
+            ip: "192.168.1.12",
+            vitri: "Kinh doanh",
+            ngay: "22/09/2025",
+            phuongthuc: "LAN"
+        }
+    ]
+};
+
+// ================== LẤY TÊN CÔNG TY ==================
+const params = new URLSearchParams(window.location.search);
+const company = params.get("company");
+
+// ================== HIỂN THỊ ==================
+const title = document.getElementById("companyName");
+const table = document.getElementById("dataTable");
+
+if (!company || !data[company] || data[company].length === 0) {
+    title.innerText = "Không có dữ liệu công ty";
+    table.innerHTML = "<tr><td>Không tìm thấy dữ liệu</td></tr>";
+} else {
+    title.innerText = "Thông tin công ty " + company;
+
+    let html = `
+    <tr>
+        <th>STT</th>
+        <th>Máy</th>
+        <th>Seri</th>
+        <th>IP</th>
+        <th>Vị trí</th>
+        <th>Ngày chốt</th>
+        <th>Phương thức</th>
+    </tr>
+    `;
+
+    data[company].forEach((item, index) => {
+        html += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${item.may}</td>
+            <td>${item.seri}</td>
+            <td>${item.ip}</td>
+            <td>${item.vitri}</td>
+            <td>${item.ngay}</td>
+            <td>${item.phuongthuc}</td>
+        </tr>
+        `;
+    });
+
+    table.innerHTML = html;
+}
+</script>
+
+</body>
+</html>

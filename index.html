@@ -2,92 +2,96 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Web đơn giản</title>
+    <title>Trang chủ</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        /* lớp phủ để chữ dễ nhìn */
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.35);
+            min-height: 100vh;
+            padding-top: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 15px;
+            margin: 40px;
+        }
+
+        .company {
+            padding: 10px;
+            border: 1px solid rgba(0,0,0,0.3);
+            background: transparent;     /* nền trong suốt */
+            cursor: pointer;
+            text-decoration: none;
+            color: red;                  /* CHỈ đổi màu chữ */
+            font-weight: bold;
+            display: block;
+        }
+
+        .company:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
 
-    <h2>Trang chuyển tiếp</h2>
+<div class="overlay">
+    <h2 style="color: red;">Danh sách công ty</h2>
+    <p>Chọn công ty để tiếp tục</p>
 
-    <p>
-        <a href="http://192.168.120.219">
-            NM1 KHO TP 192.168.120.219
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.120.99">
-            NM1 OQC 192.168.120.99
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.120.215">
-            NM1 VPC 192.168.120.215
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.120.125">
-            NM1 XA NHẤT 192.168.120.125
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.120.218">
-            NM1 CNC 192.168.120.218
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.130.106">
-            NM2 X7500 VPC 192.168.130.106
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.130.235">
-            NM2 VPC 192.168.130.235
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.130.222">
-            NM2 VPC 2 192.168.130.222
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.133.155">
-            NM2 THỐI 192.168.133.155
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.143.243">
-            NM2 VP SẠCH 192.168.143.243
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.143.103">
-            NM2 PHÒNG SẠCH 192.168.143.103
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.143.155">
-            NM2 PHÒNG SẠCH 2 192.168.143.155
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.133.133">
-            NM2 TUYỂN DỤNG 192.168.133.133
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.130.161">
-            NM2 TĨNH ĐIỆN 192.168.130.161
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.168.133.185">
-            NM2 N4 MOBILE 192.168.133.185
-        </a>
-    </p>
-    <p>
-        <a href="http://192.168.143.5">
-            NM2 N4 NGOÀI 192.168.143.5
-        </a>
-    </p>
-    
+    <div class="grid">
+        <a class="company" href="company.html?company=ANS" target="_blank">
+    ANS
+</a>
+
+        <a class="company" href="company.html?company=SN HITECH" target="_blank">
+    SN HITECH
+</a>
+
+        <a class="company" href="home.html" target="_blank">ONE SYSTEM</a>
+        <a class="company" href="home.html" target="_blank">SOLITY</a>
+        <a class="company" href="home.html" target="_blank">L TECH</a>
+        <a class="company" href="home.html" target="_blank">YOUNG ONE ( SJ )</a>
+        <a class="company" href="home.html" target="_blank">LKC</a>
+        <a class="company" href="home.html" target="_blank">MSNP</a>
+        <a class="company" href="home.html" target="_blank">TSE </a>
+        <a class="company" href="home.html" target="_blank">WELSTORY </a>
+
+        <a class="company" href="home.html" target="_blank">YG TECH</a>
+        <a class="company" href="home.html" target="_blank">DREAM TECH</a>
+        <a class="company" href="home.html" target="_blank">DATECH CON</a>
+        <a class="company" href="home.html" target="_blank">WOOJIN CNC</a>
+        <a class="company" href="home.html" target="_blank">INDOCHINA</a>
+        <a class="company" href="home.html" target="_blank">FDS ( PJH )</a>
+        <a class="company" href="home.html" target="_blank">PHONEIX</a>
+        <a class="company" href="home.html" target="_blank">MADE TECH</a>
+        <a class="company" href="home.html" target="_blank">SCG</a>
+        <a class="company" href="home.html" target="_blank">BN ENPLA</a>
+
+        <a class="company" href="home.html" target="_blank">SJ ENC</a>
+        <a class="company" href="home.html" target="_blank">MTL</a>
+        <a class="company" href="home.html" target="_blank">VITECH</a>
+        <a class="company" href="home.html" target="_blank">PSH ( LOTTE )</a>
+        <a class="company" href="home.html" target="_blank">ĐỈNH DƯƠNG</a>
+        <a class="company" href="home.html" target="_blank">HS ( YOUNG WOO)</a>
+        <a class="company" href="home.html" target="_blank">YUDO</a>
+        <a class="company" href="home.html" target="_blank">DAEKYUNG</a>
+        <a class="company" href="home.html" target="_blank">JS HITECH KN</a>
+        <a class="company" href="home.html" target="_blank">Công ty 1</a>
+    </div>
+</div>
+
 </body>
 </html>
