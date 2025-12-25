@@ -10,147 +10,182 @@ body {
     padding: 20px;
 }
 
-.top-bar {
-    margin-bottom: 15px;
-}
-
 .back-btn {
-    display: inline-block;
-    padding: 8px 14px;
-    border: 1px solid #999;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    display:inline-block;
+    padding:8px 14px;
+    border:1px solid #999;
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+    margin-bottom:15px;
 }
 
 .back-btn:hover {
-    background-color: #f0f0f0;
-}
-
-.table-container {
-    overflow-x: auto; /* giúp responsive trên điện thoại */
+    background:#f0f0f0;
 }
 
 table {
     border-collapse: collapse;
-    width: 100%;
-    max-width: 1200px;
+    width:100%;
+    max-width:1200px;
 }
 
 th, td {
-    border: 1px solid #999;
-    padding: 8px 10px;
-    text-align: center;
-    font-size: 14px;
+    border:1px solid #999;
+    padding:8px;
+    text-align:center;
 }
 
 th {
-    background-color: #f0f0f0;
+    background:#f0f0f0;
 }
 
 tr:nth-child(even) td {
-    background-color: #fafafa;
+    background:#fafafa;
 }
 
-/* Dòng chữ đỏ dưới bảng */
 #footerText {
-    color: red;
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
+    color:red;
+    font-weight:bold;
+    margin-top:12px;
+    font-size:16px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="top-bar">
-    <a href="index.html" class="back-btn">← Quay về trang chủ</a>
-</div>
+<a href="index.html" class="back-btn">← Quay về trang chủ</a>
 
 <h2 id="companyName">Thông tin công ty</h2>
 
-<div class="table-container">
-    <table id="dataTable"></table>
-</div>
+<table id="dataTable"></table>
 
-<!-- Dòng chữ màu đỏ -->
-<div id="footerText">
-    Tiên Du, Bắc Ninh
-</div>
+<div id="footerText"></div>
 
 <script>
-// ================== DỮ LIỆU ==================
+// ================== DATA 30 CÔNG TY ==================
 const data = {
-    ANS: [
-        {
-            may: "Dell Optiplex 7090",
-            seri: "ABC123456",
-            ip: "192.168.1.10",
-            vitri: "Phòng IT",
-            ngay: "20/09/2025",
-            phuongthuc: "LAN"
-        },
-        {
-            may: "HP ProDesk 600",
-            seri: "XYZ987654",
-            ip: "192.168.1.11",
-            vitri: "Kế toán",
-            ngay: "21/09/2025",
-            phuongthuc: "WiFi"
-        },
-        {
-            may: "Lenovo M720",
-            seri: "LMN456789",
-            ip: "192.168.1.12",
-            vitri: "Kinh doanh",
-            ngay: "22/09/2025",
-            phuongthuc: "LAN"
-        }
-    ]
+    ANS:{
+        name:"ANS",
+        address:"Địa chỉ KCN Tiên Sơn ",
+        items:[
+            {may:"Sam Sung X4250",seri:"28QYBJMW70000QD",ip:"192.168.1.250",vitri:"Tầng 3",ngay:"30",phuongthuc:"Tay"}
+        ]
+    },
+    SN_HITECH:{ 
+        name:"SN HITECH", 
+        address:"Địa Chỉ : KCN Hoàn Sơn", 
+        items:[
+             {may:"Sindoh D310",seri:"386100550736",ip:"192.168.0.250",vitri:"Tầng 2",ngay:"28-30",phuongthuc:"Mail"}
+        ] 
+    },
+    ONE_SYSTEM:{
+        name:"ONE SYSTEM",
+        address:"Địa Chỉ : KCN Hoàn Sơn , Gần YG tech",
+        items:[
+            {may:"D310",seri:"386100550729",ip:"1111",vitri:"Tầng 1",ngay:"28-30",phuongthuc:"Mail"}
+        ]
+    },
+    SOLITY:{ name:"SOLITY", address:"Địa Chỉ : Chân cầu đồng xép", items:[{may:"Sindoh D310",seri:"386100550736",ip:"192.168.0.250",vitri:"Tầng 2",ngay:"28-30",phuongthuc:"Mail"}] },
+    
+L_TECH:{ name:"L TECH", address:"Địa chỉ : KCN Visip ", items:[{may:"Sindoh D310",seri:"386100450689",ip:"192.168.1.250",vitri:"Tầng 4",ngay:"29",phuongthuc:"Mail"}] },
+    
+YOUNG_ONE_SJ:{ name:"YOUNG ONE ( SJ )", address:"Địa chỉ : Chợ đầu mối lim", items:[{may:"Sindoh D310",seri:"386100650774",ip:"1111",vitri:"tầng 3",ngay:"08",phuongthuc:"Mail"}] },
+    
+LKC:{ name:"LKC", address:"Địa chỉ : KCN Tiên Sơn", items:[{may:"Sindoh D330",seri:"386520200341",ip:"192.168.110.253",vitri:"Tầng 3",ngay:"10",phuongthuc:"Tay"}] },
+    
+MSNP:{ name:"MSNP", address:"Địa Chỉ : Chùa Lạc Vệ - Mất Tiền ", items:[{may:"Sam Sung X7500",seri:"1111",ip:"1111",vitri:"Tầng 1",ngay:"",phuongthuc:"Mail"}] },
+    
+TSE:{ name:"TSE", address:"Địa chỉ : KCN Visip", items:[{may:"sindoh D310",seri:"386100350679",ip:"192.168.1.155",vitri:"Tầng 3",ngay:"28-30",phuongthuc:"Mail"},{may:"N510",seri:"357120250211",ip:"192.168.1.233",vitri:"Tầng1",ngay:"28-30",phuongthuc:"Mail"},{may:"N410",seri:"391481100028",ip:"",vitri:"",ngay:"",phuongthuc:"Mail"}] },
+    
+WELSTORY:{ name:"WELSTORY", address:"Địa chỉ : KCN Visip", items:[{may:"kyocera M5521",seri:"VUX2314382",ip:"",vitri:"Dream 1",ngay:"",phuongthuc:""},{may:"kyocera P5021",seri:"VUT2307999",ip:"",vitri:"Dream 2",ngay:"",phuongthuc:""},{may:"sindoh A620",seri:"",ip:"",vitri:"Wisol",ngay:"",phuongthuc:""}] },
+
+    YG_TECH:{ name:"YG TECH", address:"KCN Đại Đồng", items:[{may:"Sam Sung X7500",seri:"0A2HBJNR800043J",ip:"192.168.1.251",vitri:"Tầng 2 ",ngay:"27",phuongthuc:"Tay"},{may:"Sam Sung X7500",seri:"0A2HBJNR800023Y",ip:"192.168.1.253",vitri:"Xưởng",ngay:"27",phuongthuc:"Tay"},{may:"Sam Sung X7500",seri:"0A2HBJNR90000NH",ip:"192.168.1.252",vitri:"gần cửa ",ngay:"27",phuongthuc:"Tay"}] },
+    
+DREAM_TECH:{ name:"DREAM TECH", address:"Địa Chỉ : KCN Visip", items:[{may:"Sam Sung X7500",seri:"0A2HBJNR800013N",ip:"192.168.130.106",vitri:"NM2 T2 ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJMW700002Z",ip:"192.168.130.235",vitri:"NM2 VPC T2 ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJLW70002AR",ip:"192.168.130.222",vitri:"NM2 VPC T2 ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJKW70000KM",ip:"192.168.133.155",vitri:"NM2 Thối T2 ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJMW700007H",ip:"",vitri:"NM2 bảo mật T2 ",ngay:"23-24",phuongthuc:"tay"},{may:"Sam Sung X4250",seri:"28QYBJMW700016B",ip:"192.168.143.243",vitri:"NM2 Phòng Sạch ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYB1BW700025H",ip:"192.168.143.103",vitri:"NM2 Sạch 1 ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJMW70000DD",ip:"192.168.143.155",vitri:"NM2 Sạch 2 ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYB1BW70000DP",ip:"192.168.133.133",vitri:"NM2 Tuyển Dung ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJKW70002HR",ip:"192.168.130.161",vitri:"NM2 Tĩnh điện ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sindoh N410",seri:"391461100068",ip:"192.168.133.185",vitri:"NM2 kho mobile ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sindoh N410",seri:"391471000060",ip:"192.168.143.5",vitri:"NM2 Ngoài ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYB1BW70002SP",ip:"192.168.120.219",vitri:"NM1 Kho TP",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYB1BW700010L",ip:"192,168,120,99",vitri:"NM1 OQC ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJLW700019V",ip:"192.168.120.215",vitri:"NM1 VPC ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJKW70002XA",ip:"192.168.120.125",vitri:"NM1 Xa Nhất ",ngay:"23-24",phuongthuc:"Tay"},{may:"Sam Sung X4250",seri:"28QYBJLW700007X",ip:"192.168.120.218",vitri:"NM1 CNC ",ngay:"23-24",phuongthuc:"Tay"}] },
+    
+DATECH_CON:{ name:"DATECH CON", address:"Địa chỉ : Võ Cường Bắc Ninh", items:[{may:"Sindoh N510",seri:"357110550186",ip:"192.168.1.250",vitri:"Tầng 3 ",ngay:"05",phuongthuc:"Mail"}] },
+    
+WOOJIN_CNC:{ name:"WOOJIN CNC", address:"Địa chỉ : Khắc Niệm", items:[{may:"Sindoh D310",seri:"386100550716",ip:"",vitri:"Khắc Niệm ",ngay:"12-14",phuongthuc:"Mail"}] },
+    
+INDOCHINA:{ name:"INDOCHINA", address:"Địa Chỉ : Ngã 6 Bắc Ninh", items:[{may:"N410",seri:"391461100091",ip:"192.168.0.100",vitri:" ",ngay:"24",phuongthuc:"Tay"}] },
+    
+FDS_PJH:{ name:"FDS ( PJH )", address:"Địa Chỉ : Xuân Ổ", items:[{may:"Sindoh D310",seri:"356171000079",ip:"192.168.1.250",vitri:"Xuân Ổ ",ngay:"22",phuongthuc:"Mail"}] },
+    
+PHONEIX:{ name:"PHONEIX", address:"Địa chỉ : Dốc pháo Thủ", items:[{may:"Sindoh D310",seri:"386190350485",ip:"",vitri:" ",ngay:"",phuongthuc:"Mail"}] },
+    
+MADE_TECH:{ name:"MADE TECH", address:"Địa chỉ : Cụm CN Khắc Niệm", items:[{may:"Sindoh D310",seri:"386100950779",ip:"192.168.1.250",vitri:"Khắc Niệm ",ngay:"25-26",phuongthuc:"Mail"}] },
+    
+SCG:{ name:"SCG", address:"Địa Chỉ : Hạp Lĩnh Khắc Niệm", items:[{may:"Sindoh N410",seri:"392480900035",ip:"192.168.1.254",vitri:"Khắc Niệm",ngay:"28-29",phuongthuc:"Mail"}] },
+    
+BN_ENPLA:{ name:"BN ENPLA", address:"Địa chỉ : Khắc Niệm", items:[{may:"Sindoh D310",seri:"386511200186",ip:"192.168.0.252",vitri:"Khắc Niệm ",ngay:"26",phuongthuc:"Mail"}] },
+
+    SJ_ENC:{ name:"SJ ENC", address:"Địa chỉ : Chung cư cát tường eco", items:[{may:"Sindoh D310",seri:"356170100039",ip:"",vitri:"Tầng 701 ",ngay:"20",phuongthuc:"Mail"}] },
+    
+MTL:{ name:"MTL", address:"Địa chỉ : Bắc Ninh", items:[{may:"Sindoh D310",seri:"386190750600",ip:"192.168.1.248",vitri:"Tầng 2",ngay:"26",phuongthuc:"Tay "}] },
+    
+VITECH:{ name:"VITECH", address:"Địa Chỉ : Bắc Ninh", items:[{may:"Sam sung X7500",seri:"",ip:"0A2HBJNTB00006M",vitri:"",ngay:"12",phuongthuc:"Mail"}] },
+    
+PSH_LOTTE:{ name:"PSH ( LOTTE )", address:"Địa Chỉ : Bắc Ninh", items:[{may:"Sam sung X7500",seri:"0A2HBJNT1000D1J",ip:"192.168.1.250",vitri:" ",ngay:"12-14",phuongthuc:"Tay"}] },
+    
+DINH_DUONG:{ name:"ĐỈNH DƯƠNG", address:"Bắc Ninh", items:[{may:"Sam ssung X7500",seri:"0A2HBJNTB00009Q",ip:"192.168.1.254",vitri:"Tầng 1 ",ngay:"28-30",phuongthuc:"Mail"},{may:"Sindoh N5",seri:" 357130850527",ip:"192.168.1.250",vitri:"Tầng 2 ",ngay:"28-30",phuongthuc:"Mail"}] },
+    
+HS_YOUNG_WOO:{ name:"HS ( YOUNG WOO )", address:"Địa chỉ : Khắc Niệm", items:[{may:"Sindoh D310",seri:"356171000084",ip:"192.168.1.250",vitri:"Tầng 2 ",ngay:"18",phuongthuc:"Tay"},{may:"Sindoh D310",seri:"386190350476",ip:"192.168.1.254",vitri:"Tầng 1 ",ngay:"18",phuongthuc:"Tay"}] },
+    
+YUDO:{ name:"YUDO", address:"Địa chỉ: Bắc ninh + Khắc Niệm", items:[{may:"Sindoh D310",seri:"387190450329",ip:"",vitri:"Tầng 4 ",ngay:"23",phuongthuc:"Mail"},
+{may:"Sindoh D310",seri:"356180400183",ip:"192.168.5.250",vitri:"Hạp Lĩnh ",ngay:"23",phuongthuc:"Mail"}] },
+    
+DAEKYUNG:{ name:"DAEKYUNG", address:"Địa Chỉ : Khắc Niệm", items:[{may:"Sindoh D310",seri:"386190750591",ip:"192.168.1.254",vitri:"tầng 2 ",ngay:"12-13",phuongthuc:"Tay"}] },
+    
+JS_HITECH_KN:{ name:"JS HITECH KN", address:"Địa Chỉ: Khắc Niệm", items:[{may:"Sindoh D310",seri:"356180100099",ip:"",vitri:"Khắc Niệm ",ngay:"2-3",phuongthuc:"Tay"}] },
+    
+CONG_TY_1:{ name:"Công ty 1", address:"Bắc Ninh", items:[] }
 };
 
-// ================== LẤY TÊN CÔNG TY ==================
-const params = new URLSearchParams(window.location.search);
-const company = params.get("company");
-
-// ================== HIỂN THỊ ==================
+// ================== LẤY ID ==================
+const id = new URLSearchParams(location.search).get("company");
 const title = document.getElementById("companyName");
 const table = document.getElementById("dataTable");
+const footer = document.getElementById("footerText");
 
-if (!company || !data[company] || data[company].length === 0) {
-    title.innerText = "Không có dữ liệu công ty";
-    table.innerHTML = "<tr><td>Không tìm thấy dữ liệu</td></tr>";
-} else {
-    title.innerText = "Thông tin công ty " + company;
+// ================== HIỂN THỊ ==================
+if(!id || !data[id]){
+    title.innerText = "Không xác định công ty";
+    table.innerHTML = "<tr><td>Không có dữ liệu</td></tr>";
+    footer.innerText = "";
+}else{
+    const c = data[id];
+    title.innerText = "Thông tin công ty " + c.name;
+    footer.innerText = c.address;
 
-    let html = `
-    <tr>
-        <th>STT</th>
-        <th>Máy</th>
-        <th>Seri</th>
-        <th>IP</th>
-        <th>Vị trí</th>
-        <th>Ngày chốt</th>
-        <th>Phương thức</th>
-    </tr>
-    `;
-
-    data[company].forEach((item, index) => {
-        html += `
+    if(c.items.length === 0){
+        table.innerHTML = "<tr><td>Chưa có dữ liệu công ty này</td></tr>";
+    }else{
+        let html = `
         <tr>
-            <td>${index + 1}</td>
-            <td>${item.may}</td>
-            <td>${item.seri}</td>
-            <td>${item.ip}</td>
-            <td>${item.vitri}</td>
-            <td>${item.ngay}</td>
-            <td>${item.phuongthuc}</td>
-        </tr>
-        `;
-    });
-
-    table.innerHTML = html;
+            <th>STT</th>
+            <th>Máy</th>
+            <th>Seri</th>
+            <th>IP</th>
+            <th>Vị trí</th>
+            <th>Ngày chốt</th>
+            <th>Phương thức</th>
+        </tr>`;
+        c.items.forEach((i,n)=>{
+            html += `
+            <tr>
+                <td>${n+1}</td>
+                <td>${i.may}</td>
+                <td>${i.seri}</td>
+                <td>${i.ip}</td>
+                <td>${i.vitri}</td>
+                <td>${i.ngay}</td>
+                <td>${i.phuongthuc}</td>
+            </tr>`;
+        });
+        table.innerHTML = html;
+    }
 }
 </script>
 

@@ -1,97 +1,137 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Trang chủ</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-image: url('background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-        }
+<meta charset="UTF-8">
+<title>Trang chủ</title>
 
-        /* lớp phủ để chữ dễ nhìn */
-        .overlay {
-            background-color: rgba(255, 255, 255, 0.35);
-            min-height: 100vh;
-            padding-top: 40px;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 15px;
-            margin: 40px;
-        }
+.overlay {
+    background-color: rgba(255,255,255,0.35);
+    min-height: 100vh;
+    padding: 40px 20px 90px;
+}
 
-        .company {
-            padding: 10px;
-            border: 1px solid rgba(0,0,0,0.3);
-            background: transparent;     /* nền trong suốt */
-            cursor: pointer;
-            text-decoration: none;
-            color: red;                  /* CHỈ đổi màu chữ */
-            font-weight: bold;
-            display: block;
-        }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
 
-        .company:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
+.company {
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.3);
+    text-align: center;
+    text-decoration: none;
+    color: red;
+    font-weight: bold;
+}
+
+.company:hover {
+    background-color: #f0f0f0;
+}
+
+/* ===== CHỮ CHẠY TRONG SUỐT TRÊN ẢNH NỀN ===== */
+#runningText {
+    position: fixed;
+    bottom: 10px;          /* cách mép dưới một chút */
+    left: 0;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    background: transparent;  /* QUAN TRỌNG */
+    z-index: 999;
+    pointer-events: none;     /* không che click */
+}
+
+#runningText span {
+    position: absolute;
+    left: 100%;
+    white-space: nowrap;
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 1px 1px 3px #000; /* nổi trên ảnh */
+    animation: runText 20s linear infinite;
+}
+
+@keyframes runText {
+    from { left: 100%; }
+    to   { left: -100%; }
+}
+</style>
 </head>
+
 <body>
 
 <div class="overlay">
-    <h2 style="color: red;">Danh sách công ty</h2>
-    <p>Chọn công ty để tiếp tục</p>
+    <h2 style="color:red; text-align:center;">Danh sách công ty</h2>
+    <p style="text-align:center;">Chọn công ty để xem dữ liệu</p>
 
     <div class="grid">
-        <a class="company" href="company.html?company=ANS" target="_blank">
-    ANS
-</a>
+        <a class="company" href="company.html?company=ANS">ANS</a>
+        <a class="company" href="company.html?company=SN_HITECH">SN HITECH</a>
+        <a class="company" href="company.html?company=ONE_SYSTEM">ONE SYSTEM</a>
+        <a class="company" href="company.html?company=SOLITY">SOLITY</a>
+        <a class="company" href="company.html?company=L_TECH">L TECH</a>
+        <a class="company" href="company.html?company=YOUNG_ONE_SJ">YOUNG ONE</a>
+        <a class="company" href="company.html?company=LKC">LKC</a>
+        <a class="company" href="company.html?company=MSNP">MSNP</a>
+        <a class="company" href="company.html?company=TSE">TSE</a>
+        <a class="company" href="company.html?company=WELSTORY">WELSTORY</a>
 
-        <a class="company" href="company.html?company=SN HITECH" target="_blank">
-    SN HITECH
-</a>
+        <a class="company" href="company.html?company=YG_TECH">YG TECH</a>
+        <a class="company" href="company.html?company=DREAM_TECH">DREAM TECH</a>
+        <a class="company" href="company.html?company=DATECH_CON">DATECH CON</a>
+        <a class="company" href="company.html?company=WOOJIN_CNC">WOOJIN CNC</a>
+        <a class="company" href="company.html?company=INDOCHINA">INDOCHINA</a>
+        <a class="company" href="company.html?company=FDS_PJH">FDS</a>
+        <a class="company" href="company.html?company=PHONEIX">PHONEIX</a>
+        <a class="company" href="company.html?company=MADE_TECH">MADE TECH</a>
+        <a class="company" href="company.html?company=SCG">SCG</a>
+        <a class="company" href="company.html?company=BN_ENPLA">BN ENPLA</a>
 
-        <a class="company" href="home.html" target="_blank">ONE SYSTEM</a>
-        <a class="company" href="home.html" target="_blank">SOLITY</a>
-        <a class="company" href="home.html" target="_blank">L TECH</a>
-        <a class="company" href="home.html" target="_blank">YOUNG ONE ( SJ )</a>
-        <a class="company" href="home.html" target="_blank">LKC</a>
-        <a class="company" href="home.html" target="_blank">MSNP</a>
-        <a class="company" href="home.html" target="_blank">TSE </a>
-        <a class="company" href="home.html" target="_blank">WELSTORY </a>
-
-        <a class="company" href="home.html" target="_blank">YG TECH</a>
-        <a class="company" href="home.html" target="_blank">DREAM TECH</a>
-        <a class="company" href="home.html" target="_blank">DATECH CON</a>
-        <a class="company" href="home.html" target="_blank">WOOJIN CNC</a>
-        <a class="company" href="home.html" target="_blank">INDOCHINA</a>
-        <a class="company" href="home.html" target="_blank">FDS ( PJH )</a>
-        <a class="company" href="home.html" target="_blank">PHONEIX</a>
-        <a class="company" href="home.html" target="_blank">MADE TECH</a>
-        <a class="company" href="home.html" target="_blank">SCG</a>
-        <a class="company" href="home.html" target="_blank">BN ENPLA</a>
-
-        <a class="company" href="home.html" target="_blank">SJ ENC</a>
-        <a class="company" href="home.html" target="_blank">MTL</a>
-        <a class="company" href="home.html" target="_blank">VITECH</a>
-        <a class="company" href="home.html" target="_blank">PSH ( LOTTE )</a>
-        <a class="company" href="home.html" target="_blank">ĐỈNH DƯƠNG</a>
-        <a class="company" href="home.html" target="_blank">HS ( YOUNG WOO)</a>
-        <a class="company" href="home.html" target="_blank">YUDO</a>
-        <a class="company" href="home.html" target="_blank">DAEKYUNG</a>
-        <a class="company" href="home.html" target="_blank">JS HITECH KN</a>
-        <a class="company" href="home.html" target="_blank">Công ty 1</a>
+        <a class="company" href="company.html?company=SJ_ENC">SJ ENC</a>
+        <a class="company" href="company.html?company=MTL">MTL</a>
+        <a class="company" href="company.html?company=VITECH">VITECH</a>
+        <a class="company" href="company.html?company=PSH_LOTTE">PSH (LOTTE)</a>
+        <a class="company" href="company.html?company=DINH_DUONG">ĐỈNH DƯƠNG</a>
+        <a class="company" href="company.html?company=HS_YOUNG_WOO">HS (YOUNG WOO)</a>
+        <a class="company" href="company.html?company=YUDO">YUDO</a>
+        <a class="company" href="company.html?company=DAEKYUNG">DAEKYUNG</a>
+        <a class="company" href="company.html?company=JS_HITECH_KN">JS HITECH KN</a>
+        <a class="company" href="company.html?company=CONGTY1">CÔNG TY 1</a>
     </div>
 </div>
+
+<!-- CHỮ CHẠY -->
+<div id="runningText">
+    <span id="textContent"></span>
+</div>
+
+<script>
+const dayMessages = {
+    1:"Mồng 1: Xin chào bạn",
+    2:"Mồng 2: Tôi yêu bạn",
+    3:"Mồng 3: Chúc bạn một ngày tốt lành",
+    15:"Mồng 15: Giữa tháng – tiếp tục cố gắng",
+    31:"Mồng 31: Hoàn tất – An toàn – Hiệu quả"
+};
+
+const day = new Date().getDate();
+document.getElementById("textContent").innerText =
+    dayMessages[day] || "Chào Bé My";
+</script>
 
 </body>
 </html>
