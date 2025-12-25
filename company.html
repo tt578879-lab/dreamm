@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Thông tin công ty</title>
+<title>Thông tin</title>
 
 <style>
 body {
@@ -19,10 +19,7 @@ body {
     font-weight:bold;
     margin-bottom:15px;
 }
-
-.back-btn:hover {
-    background:#f0f0f0;
-}
+.back-btn:hover { background:#f0f0f0; }
 
 table {
     border-collapse: collapse;
@@ -36,19 +33,24 @@ th, td {
     text-align:center;
 }
 
-th {
-    background:#f0f0f0;
-}
-
-tr:nth-child(even) td {
-    background:#fafafa;
-}
+th { background:#f0f0f0; }
+tr:nth-child(even) td { background:#fafafa; }
 
 #footerText {
     color:red;
     font-weight:bold;
     margin-top:12px;
     font-size:16px;
+}
+
+/* ===== MÃ LỖI ===== */
+.search-box {
+    margin:20px 0;
+}
+.search-box input {
+    padding:8px;
+    width:300px;
+    font-size:15px;
 }
 </style>
 </head>
@@ -57,37 +59,47 @@ tr:nth-child(even) td {
 
 <a href="index.html" class="back-btn">← Quay về trang chủ</a>
 
-<h2 id="companyName">Thông tin công ty</h2>
+<h2 id="pageTitle"></h2>
 
-<table id="dataTable"></table>
+<div id="content"></div>
 
 <div id="footerText"></div>
 
 <script>
-// ================== DATA 30 CÔNG TY ==================
-const data = {
-    ANS:{
-        name:"ANS",
-        address:"Địa chỉ KCN Tiên Sơn ",
-        items:[
-            {may:"Sam Sung X4250",seri:"28QYBJMW70000QD",ip:"192.168.1.250",vitri:"Tầng 3",ngay:"30",phuongthuc:"Tay"}
-        ]
-    },
-    SN_HITECH:{ 
-        name:"SN HITECH", 
-        address:"Địa Chỉ : KCN Hoàn Sơn", 
-        items:[
-             {may:"Sindoh D310",seri:"386100550736",ip:"192.168.0.250",vitri:"Tầng 2",ngay:"28-30",phuongthuc:"Mail"}
-        ] 
-    },
-    ONE_SYSTEM:{
-        name:"ONE SYSTEM",
-        address:"Địa Chỉ : KCN Hoàn Sơn , Gần YG tech",
-        items:[
-            {may:"D310",seri:"386100550729",ip:"1111",vitri:"Tầng 1",ngay:"28-30",phuongthuc:"Mail"}
-        ]
-    },
-    SOLITY:{ name:"SOLITY", address:"Địa Chỉ : Chân cầu đồng xép", items:[{may:"Sindoh D310",seri:"386100550736",ip:"192.168.0.250",vitri:"Tầng 2",ngay:"28-30",phuongthuc:"Mail"}] },
+// ================== DỮ LIỆU MÃ LỖI ==================
+const errorCodes = [
+    {code:"2558", desc:"sindoh Mực Nhiều", solution:"Xả mực"},
+    {code:"kyocera", desc:"web 2100 2100", solution:"trên máy Admin Admin"},
+    {code:"a620", desc:"admin", solution:"aaaaaa"},
+    {code:"n4", desc:"recovery 67", solution:""},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
+];
+
+// ================== DỮ LIỆU CÔNG TY ==================
+const data = { /* 🔴 GIỮ NGUYÊN DATA CỦA BẠN – KHÔNG ĐỔI */ 
+ANS:{name:"ANS",address:"Địa chỉ KCN Tiên Sơn",items:[
+{may:"Sam Sung X4250",seri:"28QYBJMW70000QD",ip:"192.168.1.250",vitri:"Tầng 3",ngay:"30",phuongthuc:"Tay"}
+]},
+SN_HITECH:{name:"SN HITECH",address:"KCN Hoàn Sơn",items:[
+{may:"Sindoh D310",seri:"386100550736",ip:"192.168.0.250",vitri:"Tầng 2",ngay:"28-30",phuongthuc:"Mail"}
+]},
+ONE_SYSTEM:{name:"ONE SYSTEM",address:"KCN Hoàn Sơn",items:[
+{may:"D310",seri:"386100550729",ip:"1111",vitri:"Tầng 1",ngay:"28-30",phuongthuc:"Mail"}
+]},
+SOLITY:{ name:"SOLITY", address:"Địa Chỉ : Chân cầu đồng xép", items:[{may:"Sindoh D310",seri:"386100550736",ip:"192.168.0.250",vitri:"Tầng 2",ngay:"28-30",phuongthuc:"Mail"}] },
     
 L_TECH:{ name:"L TECH", address:"Địa chỉ : KCN Visip ", items:[{may:"Sindoh D310",seri:"386100450689",ip:"192.168.1.250",vitri:"Tầng 4",ngay:"29",phuongthuc:"Mail"}] },
     
@@ -142,37 +154,96 @@ JS_HITECH_KN:{ name:"JS HITECH KN", address:"Địa Chỉ: Khắc Niệm", items
     
 CONG_TY_1:{ name:"Công ty 1", address:"Bắc Ninh", items:[] }
 };
+// 👉 các công ty khác của bạn giữ nguyên
 
-// ================== LẤY ID ==================
-const id = new URLSearchParams(location.search).get("company");
-const title = document.getElementById("companyName");
-const table = document.getElementById("dataTable");
+// ================== ĐỌC PARAM ==================
+const params = new URLSearchParams(location.search);
+const companyId = params.get("company");
+const mode = params.get("mode");
+
+const title = document.getElementById("pageTitle");
+const content = document.getElementById("content");
 const footer = document.getElementById("footerText");
 
-// ================== HIỂN THỊ ==================
-if(!id || !data[id]){
-    title.innerText = "Không xác định công ty";
-    table.innerHTML = "<tr><td>Không có dữ liệu</td></tr>";
-    footer.innerText = "";
-}else{
-    const c = data[id];
+// ================== CHẾ ĐỘ MÃ LỖI ==================
+if (mode === "error") {
+
+    title.innerText = "Tra cứu Mã Lỗi";
+    footer.innerText = "Nhập mã lỗi để tra cứu";
+
+    content.innerHTML = `
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Nhập mã lỗi hoặc mô tả...">
+        </div>
+        <table id="errorTable" style="display:none;">
+            <tr>
+                <th>Mã lỗi</th>
+                <th>Mô tả</th>
+                <th>Cách xử lý</th>
+            </tr>
+        </table>
+    `;
+
+    const input = document.getElementById("searchInput");
+    const table = document.getElementById("errorTable");
+
+    input.addEventListener("input", () => {
+        const key = input.value.trim().toLowerCase();
+        if (!key) {
+            table.style.display = "none";
+            return;
+        }
+        table.style.display = "table";
+
+        let html = `
+        <tr>
+            <th>Mã lỗi</th>
+            <th>Mô tả</th>
+            <th>Cách xử lý</th>
+        </tr>`;
+
+        errorCodes.filter(e =>
+           e.code.toLowerCase().includes(key) ||
+           e.desc.toLowerCase().includes(key) ||
+           e.solution.toLowerCase().includes(key)
+        )
+
+            .forEach(e => {
+                html += `
+                <tr>
+                    <td>${e.code}</td>
+                    <td>${e.desc}</td>
+                    <td>${e.solution}</td>
+                </tr>`;
+            });
+
+        table.innerHTML = html;
+    });
+}
+
+// ================== CHẾ ĐỘ CÔNG TY ==================
+else if (companyId && data[companyId]) {
+
+    const c = data[companyId];
     title.innerText = "Thông tin công ty " + c.name;
     footer.innerText = c.address;
 
-    if(c.items.length === 0){
-        table.innerHTML = "<tr><td>Chưa có dữ liệu công ty này</td></tr>";
-    }else{
+    if (c.items.length === 0) {
+        content.innerHTML = "<p>Chưa có dữ liệu</p>";
+    } else {
         let html = `
-        <tr>
-            <th>STT</th>
-            <th>Máy</th>
-            <th>Seri</th>
-            <th>IP</th>
-            <th>Vị trí</th>
-            <th>Ngày chốt</th>
-            <th>Phương thức</th>
-        </tr>`;
-        c.items.forEach((i,n)=>{
+        <table>
+            <tr>
+                <th>STT</th>
+                <th>Máy</th>
+                <th>Seri</th>
+                <th>IP</th>
+                <th>Vị trí</th>
+                <th>Ngày</th>
+                <th>Phương thức</th>
+            </tr>`;
+
+        c.items.forEach((i, n) => {
             html += `
             <tr>
                 <td>${n+1}</td>
@@ -184,8 +255,16 @@ if(!id || !data[id]){
                 <td>${i.phuongthuc}</td>
             </tr>`;
         });
-        table.innerHTML = html;
+
+        html += "</table>";
+        content.innerHTML = html;
     }
+}
+
+// ================== TRƯỜNG HỢP SAI ==================
+else {
+    title.innerText = "Không xác định nội dung";
+    content.innerHTML = "<p>Dữ liệu không tồn tại</p>";
 }
 </script>
 

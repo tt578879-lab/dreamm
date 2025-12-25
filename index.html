@@ -40,6 +40,29 @@ body {
 .company:hover {
     background-color: #f0f0f0;
 }
+/* ===== MÃ LỖI ===== */
+.bottom-section {
+    margin-top: 50px;
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+.error-btn {
+    display: inline-block;
+    padding: 14px 50px;
+    border: 2px solid red;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.error-btn:hover {
+    background: red;
+    color: white;
+}
 
 /* ===== CHỮ CHẠY TRONG SUỐT TRÊN ẢNH NỀN ===== */
 #runningText {
@@ -110,7 +133,11 @@ body {
         <a class="company" href="company.html?company=YUDO">YUDO</a>
         <a class="company" href="company.html?company=DAEKYUNG">DAEKYUNG</a>
         <a class="company" href="company.html?company=JS_HITECH_KN">JS HITECH KN</a>
-        <a class="company" href="company.html?company=CONGTY1">CÔNG TY 1</a>
+        <a class="company" href="company.html?company=CONG_TY_1">CÔNG TY 1</a>
+    </div>
+    <!-- ===== MÃ LỖI ===== -->
+    <div class="bottom-section">
+        <a href="company.html?mode=error" class="company">Mã lỗi</a>
     </div>
 </div>
 
@@ -130,7 +157,7 @@ const dayMessages = {
 
 const day = new Date().getDate();
 document.getElementById("textContent").innerText =
-    dayMessages[day] || "Chào Bé My";
+    dayMessages[day] || "Chúc Bạn Có Một Ngày Làm Việc Thật Vui Vẻ";
 </script>
 
 </body>
