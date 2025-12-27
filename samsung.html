@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tìm Kiếm</title>
+<style>
+body { font-family: Arial; padding: 20px; }
+.back-btn { display:inline-block; padding:8px 14px; border:1px solid #999; text-decoration:none; color:#333; font-weight:bold; margin-bottom:15px; }
+.back-btn:hover { background:#f0f0f0; }
+table { border-collapse: collapse; width:100%; max-width:800px; }
+th, td { border:1px solid #999; padding:8px; text-align:center; }
+th { background:#f0f0f0; }
+tr:nth-child(even) td { background:#fafafa; }
+.search-box { margin:20px 0; }
+.search-box input { padding:8px; width:300px; font-size:15px; }
+tr:hover td { background-color:#f5f5f5; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">← Quay về trang chủ</a>
+
+<h2>Tìm Kiếm </h2>
+<div id="content">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Nhập mã lỗi hoặc mô tả...">
+    </div>
+    <table id="errorTable" style="display:none;">
+        <tr>
+            <th>Mã lỗi</th>
+            <th>Mô tả / Giải pháp</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+// Dữ liệu riêng cho company1
+const company1Data = [
+    {code:"u2 6122", desc:"Lỗi LSU hoặc dây cắm LSU", solution:""},
+    {code:"", desc:"", solution:""},
+    {code:"", desc:"", solution:""},
+    {code:"", desc:"", solution:""},
+    // thêm dữ liệu khác
+];
+
+const input = document.getElementById("searchInput");
+const table = document.getElementById("errorTable");
+
+input.addEventListener("input", () => {
+    const key = input.value.trim().toLowerCase();
+    if (!key) {
+        table.style.display = "none";
+        return;
+    }
+    table.style.display = "table";
+
+    let html = `<tr><th>Mã lỗi</th><th>Mô tả / Giải pháp</th></tr>`;
+
+    company1Data.filter(e =>
+        e.code.toLowerCase().includes(key) ||
+        e.desc.toLowerCase().includes(key) ||
+        e.solution.toLowerCase().includes(key)
+    ).forEach(e => {
+        html += `<tr>
+                    <td>${e.code}</td>
+                    <td>${e.desc}: ${e.solution}</td>
+                 </tr>`;
+    });
+
+    table.innerHTML = html;
+});
+</script>
+
+</body>
+</html>

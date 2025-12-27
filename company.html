@@ -66,27 +66,6 @@ tr:nth-child(even) td { background:#fafafa; }
 <div id="footerText"></div>
 
 <script>
-// ================== DỮ LIỆU MÃ LỖI ==================
-const errorCodes = [
-    {code:"2558", desc:"sindoh Mực Nhiều", solution:"Xả mực"},
-    {code:"kyocera", desc:"web 2100 2100", solution:"trên máy Admin Admin"},
-    {code:"a620", desc:"admin", solution:"aaaaaa"},
-    {code:"n4", desc:"recovery 67", solution:""},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-    {code:"123", desc:"Máy báo lỗi mực", solution:"Thay mực mới"},
-];
 
 // ================== DỮ LIỆU CÔNG TY ==================
 const data = { /* 🔴 GIỮ NGUYÊN DATA CỦA BẠN – KHÔNG ĐỔI */ 
@@ -159,70 +138,13 @@ CONG_TY_1:{ name:"Công ty 1", address:"Bắc Ninh", items:[] }
 // ================== ĐỌC PARAM ==================
 const params = new URLSearchParams(location.search);
 const companyId = params.get("company");
-const mode = params.get("mode");
 
 const title = document.getElementById("pageTitle");
 const content = document.getElementById("content");
 const footer = document.getElementById("footerText");
 
-// ================== CHẾ ĐỘ MÃ LỖI ==================
-if (mode === "error") {
-
-    title.innerText = "Tra cứu Mã Lỗi";
-    footer.innerText = "Nhập mã lỗi để tra cứu";
-
-    content.innerHTML = `
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Nhập mã lỗi hoặc mô tả...">
-        </div>
-        <table id="errorTable" style="display:none;">
-            <tr>
-                <th>Mã lỗi</th>
-                <th>Mô tả</th>
-                <th>Cách xử lý</th>
-            </tr>
-        </table>
-    `;
-
-    const input = document.getElementById("searchInput");
-    const table = document.getElementById("errorTable");
-
-    input.addEventListener("input", () => {
-        const key = input.value.trim().toLowerCase();
-        if (!key) {
-            table.style.display = "none";
-            return;
-        }
-        table.style.display = "table";
-
-        let html = `
-        <tr>
-            <th>Mã lỗi</th>
-            <th>Mô tả</th>
-            <th>Cách xử lý</th>
-        </tr>`;
-
-        errorCodes.filter(e =>
-           e.code.toLowerCase().includes(key) ||
-           e.desc.toLowerCase().includes(key) ||
-           e.solution.toLowerCase().includes(key)
-        )
-
-            .forEach(e => {
-                html += `
-                <tr>
-                    <td>${e.code}</td>
-                    <td>${e.desc}</td>
-                    <td>${e.solution}</td>
-                </tr>`;
-            });
-
-        table.innerHTML = html;
-    });
-}
-
 // ================== CHẾ ĐỘ CÔNG TY ==================
-else if (companyId && data[companyId]) {
+if (companyId && data[companyId]) {
 
     const c = data[companyId];
     title.innerText = "Thông tin công ty " + c.name;
@@ -266,6 +188,7 @@ else {
     title.innerText = "Không xác định nội dung";
     content.innerHTML = "<p>Dữ liệu không tồn tại</p>";
 }
+
 </script>
 
 </body>

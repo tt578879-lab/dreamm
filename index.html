@@ -67,7 +67,7 @@ body {
 /* ===== CHỮ CHẠY TRONG SUỐT TRÊN ẢNH NỀN ===== */
 #runningText {
     position: fixed;
-    bottom: 10px;          /* cách mép dưới một chút */
+    bottom: 20px;          /* cách mép dưới một chút */
     left: 0;
     width: 100%;
     height: 30px;
@@ -81,9 +81,9 @@ body {
     position: absolute;
     left: 100%;
     white-space: nowrap;
-    color: red;
+    color: black;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 25px;
     text-shadow: 1px 1px 3px #000; /* nổi trên ảnh */
     animation: runText 20s linear infinite;
 }
@@ -92,6 +92,16 @@ body {
     from { left: 100%; }
     to   { left: -100%; }
 }
+#fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 998;
+}
+
 </style>
 </head>
 
@@ -135,10 +145,11 @@ body {
         <a class="company" href="company.html?company=JS_HITECH_KN">JS HITECH KN</a>
         <a class="company" href="company.html?company=CONG_TY_1">CÔNG TY 1</a>
     </div>
-    <!-- ===== MÃ LỖI ===== -->
-    <div class="bottom-section">
-        <a href="company.html?mode=error" class="company">Mã lỗi</a>
-    </div>
+    <!-- ===== BOTTOM SECTION ===== -->
+<div class="bottom-section">
+    <a href="sindoh.html" class="company">Sindoh</a>
+    <a href="samsung.html" class="company">Sam sung</a>
+</div>
 </div>
 
 <!-- CHỮ CHẠY -->
@@ -152,13 +163,100 @@ const dayMessages = {
     2:"Mồng 2: Tôi yêu bạn",
     3:"Mồng 3: Chúc bạn một ngày tốt lành",
     15:"Mồng 15: Giữa tháng – tiếp tục cố gắng",
+    26:"Ngày 26: Đại ca ơi hôm nay chốt MTL(Tay) , BN Enpla(mail) , YG tech(Tay)",
     31:"Mồng 31: Hoàn tất – An toàn – Hiệu quả"
 };
 
 const day = new Date().getDate();
 document.getElementById("textContent").innerText =
     dayMessages[day] || "Chúc Bạn Có Một Ngày Làm Việc Thật Vui Vẻ";
+
 </script>
+<audio id="bgMusic"></audio>
+
+<script>
+const playlist = [
+  "music1.mp3.mp3",
+  "music2.mp3",
+  "music3.mp3"
+];
+
+let i = 0;
+const audio = document.getElementById("bgMusic");
+audio.volume = 0.3;
+
+function playNext() {
+  audio.src = playlist[i];
+  audio.play();
+  i = (i + 1) % playlist.length;
+}
+
+audio.onended = playNext;
+
+// click lần đầu bất kỳ → bắt đầu hát
+document.addEventListener("click", () => {
+  playNext();
+}, { once: true });
+</script>
+<canvas id="fireworks"></canvas>
+<script>
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.onresize = resize;
+
+const particles = [];
+
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function createFirework() {
+    const x = random(100, canvas.width - 100);
+    const y = random(100, canvas.height / 2);
+    const count = 60;
+
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x, y,
+            vx: Math.cos(i) * random(2, 6),
+            vy: Math.sin(i) * random(2, 6),
+            alpha: 1,
+            color: `hsl(${Math.random()*360},100%,60%)`
+        });
+    }
+}
+
+function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.015;
+
+        if (p.alpha <= 0) particles.splice(i, 1);
+
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(update);
+}
+
+setInterval(createFirework, 1200);
+update();
+</script>
+
 
 </body>
 </html>
