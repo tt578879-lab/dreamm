@@ -16,6 +16,8 @@ body {
 }
 
 .overlay {
+    position: relative;
+    z-index: 100;
     background-color: rgba(255,255,255,0.35);
     min-height: 100vh;
     padding: 40px 20px 90px;
@@ -94,18 +96,38 @@ body {
 }
 #fireworks {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+    inset: 0;
     z-index: 998;
+    pointer-events: none;
 }
 
+#tetSlideshow {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  pointer-events: none;
+}
+
+#tetSlideshow img {
+  max-width: 420px;
+  max-height: 420px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: all 1.5s ease;
+  filter: contrast(1.1) saturate(1.1);
+}
 </style>
 </head>
 
 <body>
+<!-- SLIDESHOW ẢNH TẾT -->
+<div id="tetSlideshow">
+  <img id="tetImg" src="tet1.jpg">
+</div>
+
 
 <div class="overlay">
     <h2 style="color:red; text-align:center;">Danh sách công ty</h2>
@@ -175,88 +197,143 @@ document.getElementById("textContent").innerText =
 <audio id="bgMusic"></audio>
 
 <script>
+// ===== NHẠC NỀN =====
 const playlist = [
-  "music1.mp3.mp3",
+  "music1.mp3",
   "music2.mp3",
   "music3.mp3"
 ];
 
-let i = 0;
+let musicIndex = 0;
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.3;
 
-function playNext() {
-  audio.src = playlist[i];
-  audio.play();
-  i = (i + 1) % playlist.length;
+function playMusic() {
+  audio.src = playlist[musicIndex];
+  audio.play().catch(()=>{});
 }
 
-audio.onended = playNext;
+audio.addEventListener("ended", () => {
+  musicIndex = (musicIndex + 1) % playlist.length;
+  playMusic();
+});
 
-// click lần đầu bất kỳ → bắt đầu hát
+// click lần đầu để vượt chặn Chrome
 document.addEventListener("click", () => {
-  playNext();
-}, { once: true });
+  playMusic();
+}, { once:true });
 </script>
+
+
 <canvas id="fireworks"></canvas>
+
 <script>
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
+canvas.style.position = "fixed";
+canvas.style.top = 0;
+canvas.style.left = 0;
+canvas.style.width = "100%";
+canvas.style.height = "100%";
+canvas.style.pointerEvents = "none";
+canvas.style.zIndex = 10;
+
 function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 resize();
-window.onresize = resize;
+window.addEventListener("resize", resize);
 
-const particles = [];
+let fireworks = [];
 
 function random(min, max) {
-    return Math.random() * (max - min) + min;
+  return Math.random() * (max - min) + min;
 }
 
 function createFirework() {
-    const x = random(100, canvas.width - 100);
-    const y = random(100, canvas.height / 2);
-    const count = 60;
+  const x = random(100, canvas.width - 100);
+  const y = random(50, canvas.height / 2);
+  const colors = ["#ff3333","#ffd700","#33ccff","#ff66ff","#66ff66"];
 
-    for (let i = 0; i < count; i++) {
-        particles.push({
-            x, y,
-            vx: Math.cos(i) * random(2, 6),
-            vy: Math.sin(i) * random(2, 6),
-            alpha: 1,
-            color: `hsl(${Math.random()*360},100%,60%)`
-        });
-    }
-}
-
-function update() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.alpha -= 0.015;
-
-        if (p.alpha <= 0) particles.splice(i, 1);
-
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fill();
+  for (let i = 0; i < 80; i++) {
+    fireworks.push({
+      x, y,
+      vx: Math.cos(i) * random(1, 4),
+      vy: Math.sin(i) * random(1, 4),
+      alpha: 1,
+      color: colors[Math.floor(Math.random()*colors.length)]
     });
-
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(update);
+  }
 }
 
-setInterval(createFirework, 1200);
-update();
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  fireworks.forEach((p, i) => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.alpha -= 0.01;
+
+    if (p.alpha <= 0) fireworks.splice(i,1);
+
+    ctx.globalAlpha = p.alpha;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(draw);
+}
+
+setInterval(createFirework, 900);
+draw();
 </script>
 
+<script>
+const tetImages = [
+  "tet1.jpg",
+  "tet2.jpg",
+  "tet3.jpg",
+  "tet4.jpg",
+  "tet5.jpg",
+  "tet6.jpg",
+  "tet7.jpg",
+  "tet8.jpg"
+];
+
+const effects = [
+  "scale(1) rotate(0deg)",
+  "scale(1.2) rotate(5deg)",
+  "scale(0.9) rotate(-5deg)",
+  "scale(1.3)",
+  "rotateY(180deg)",
+  "rotateX(180deg)"
+];
+
+let imgIndex = 0;
+const img = document.getElementById("tetImg");
+
+function showTetImage() {
+  img.style.opacity = 0;
+
+  setTimeout(() => {
+    img.src = tetImages[imgIndex];
+
+    const effect = effects[Math.floor(Math.random() * effects.length)];
+    img.style.transform = `translate(-50%, -50%) ${effect}`;
+
+    img.style.opacity = 0.8; // trong suốt nhẹ
+    imgIndex = (imgIndex + 1) % tetImages.length;
+  }, 1200);
+}
+
+showTetImage();
+setInterval(showTetImage, 4500);
+</script>
 
 </body>
 </html>
