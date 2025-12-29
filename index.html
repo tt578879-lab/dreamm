@@ -99,30 +99,28 @@ body {
     z-index: 998;
     pointer-events: none;
 }
-#imageMarquee {
+.image-marquee {
   position: fixed;
-  bottom: 80px;            /* chỉnh cao thấp */
-  left: 0;
+  bottom: 90px;              /* chỉnh cao thấp tại đây */
   width: 100%;
-  height: 520px;
   overflow: hidden;
-  z-index: 5;
+  z-index: 20;
   pointer-events: none;
 }
 
 .image-track {
   display: flex;
-  gap: 30px;
-  animation: scrollImages 40s linear infinite;
+  width: max-content;
+  animation: scrollImages 80s linear infinite;
 }
 
 .image-track img {
+  width: auto;              /* TO để thấy mặt */
   height: 520px;
-  width: auto;             /* KHÔNG méo */
-  object-fit: contain;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  opacity: 0.95;
+  object-fit: cover;         /* KHÔNG MÉO */
+  margin-right: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
 }
 
 @keyframes scrollImages {
@@ -133,7 +131,6 @@ body {
     transform: translateX(-50%);
   }
 }
-
 
 </style>
 </head>
@@ -304,7 +301,7 @@ setInterval(createFirework, 900);
 draw();
 </script>
 <!-- SLIDE ẢNH CHẠY -->
-<div id="imageMarquee">
+<div class="image-marquee">
   <div class="image-track">
     <img src="tet1.jpg">
     <img src="tet2.jpg">
@@ -314,10 +311,16 @@ draw();
     <img src="tet6.jpg">
     <img src="tet7.jpg">
     <img src="tet8.jpg">
-    <!-- lặp lại để chạy mượt -->
+
+    <!-- NHÂN ĐÔI để chạy mượt -->
     <img src="tet1.jpg">
     <img src="tet2.jpg">
     <img src="tet3.jpg">
+    <img src="tet4.jpg">
+    <img src="tet5.jpg">
+    <img src="tet6.jpg">
+    <img src="tet7.jpg">
+    <img src="tet8.jpg">
   </div>
 </div>
 
