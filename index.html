@@ -8,11 +8,11 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('background.jpg');
+    min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    transition: background-image 1.5s ease-in-out;
 }
 
 .overlay {
@@ -270,6 +270,34 @@ setInterval(createFirework, 900);
 draw();
 </script>
 
+<script>
+const backgrounds = [
+  "background.jpg",
+  "tet1.jpg",
+  "tet2.jpg",
+  "tet3.jpg",
+  "tet4.jpg",
+  "tet5.jpg",
+  "tet6.jpg",
+  "tet7.jpg",
+  "tet8.jpg"
+];
+
+let bgIndex = 0;
+
+function changeBackground() {
+  document.body.style.backgroundImage =
+    `url('${backgrounds[bgIndex]}')`;
+
+  bgIndex = (bgIndex + 1) % backgrounds.length;
+}
+
+// chạy ngay khi load
+changeBackground();
+
+// đổi ảnh mỗi 12 giây (bạn chỉnh số này)
+setInterval(changeBackground, 12000);
+</script>
 
 </body>
 </html>
