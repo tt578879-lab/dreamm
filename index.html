@@ -8,13 +8,12 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    min-height: 100vh;
+    background-image: url('background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: background-image 1.5s ease-in-out;
+    min-height: 100vh;
 }
-
 .overlay {
     position: relative;
     z-index: 100;
@@ -100,6 +99,41 @@ body {
     z-index: 998;
     pointer-events: none;
 }
+#imageMarquee {
+  position: fixed;
+  bottom: 80px;            /* chỉnh cao thấp */
+  left: 0;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.image-track {
+  display: flex;
+  gap: 30px;
+  animation: scrollImages 40s linear infinite;
+}
+
+.image-track img {
+  height: 320px;
+  width: auto;             /* KHÔNG méo */
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  opacity: 0.95;
+}
+
+@keyframes scrollImages {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 
 </style>
 </head>
@@ -269,35 +303,24 @@ function draw() {
 setInterval(createFirework, 900);
 draw();
 </script>
+<!-- SLIDE ẢNH CHẠY -->
+<div id="imageMarquee">
+  <div class="image-track">
+    <img src="tet1.jpg">
+    <img src="tet2.jpg">
+    <img src="tet3.jpg">
+    <img src="tet4.jpg">
+    <img src="tet5.jpg">
+    <img src="tet6.jpg">
+    <img src="tet7.jpg">
+    <img src="tet8.jpg">
+    <!-- lặp lại để chạy mượt -->
+    <img src="tet1.jpg">
+    <img src="tet2.jpg">
+    <img src="tet3.jpg">
+  </div>
+</div>
 
-<script>
-const backgrounds = [
-  "background.jpg",
-  "tet1.jpg",
-  "tet2.jpg",
-  "tet3.jpg",
-  "tet4.jpg",
-  "tet5.jpg",
-  "tet6.jpg",
-  "tet7.jpg",
-  "tet8.jpg"
-];
-
-let bgIndex = 0;
-
-function changeBackground() {
-  document.body.style.backgroundImage =
-    `url('${backgrounds[bgIndex]}')`;
-
-  bgIndex = (bgIndex + 1) % backgrounds.length;
-}
-
-// chạy ngay khi load
-changeBackground();
-
-// đổi ảnh mỗi 12 giây (bạn chỉnh số này)
-setInterval(changeBackground, 12000);
-</script>
 
 </body>
 </html>
